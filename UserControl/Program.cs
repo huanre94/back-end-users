@@ -1,5 +1,9 @@
+using UserControl.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.ConfigureCors();
 // Add services to the container.
 
 builder.Services.AddControllers();
