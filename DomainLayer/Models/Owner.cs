@@ -22,6 +22,7 @@ namespace DomainLayer.Models
 
         public Owner()
         {
+            IsActive = true;
             CreatedAt = DateTime.Now;
         }
     }
