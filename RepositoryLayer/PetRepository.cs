@@ -14,23 +14,33 @@ namespace RepositoryLayer
         {
         }
 
-        public IEnumerable<Pet> GetAllPets(bool trackChanges = false)
+        public void CreatePet(long ownerId, Pet pet)
         {
-            return FindAll(trackChanges)
+            pet.OwnerId = ownerId;
+            Create(pet);
+        }
+
+        public void DeletePet(Pet pet) => Delete(pet);
+
+        public void UpdatePet(long ownerId, Pet pet)
+        {
+            pet.OwnerId = ownerId;
+            Update(pet);
+        }
+
+        public IEnumerable<Pet> GetPets(long ownerId, bool trackChanges = false)
+        {
+            return FindByCondition(p => p.OwnerId == ownerId, trackChanges)
                  .OrderBy(p => p.Id)
                  .ToList();
         }
 
-        public Pet GetPetById(long id, bool trackChanges = false)
+        public Pet GetPetById(long ownerId, long id, bool trackChanges = false)
         {
-            return FindByCondition(p => p.Id.Equals(id), trackChanges)
+            return FindByCondition(p => p.OwnerId.Equals(ownerId) && p.Id.Equals(id), trackChanges)
                 .SingleOrDefault();
         }
 
-        public IEnumerable<Pet> GetPetsByOwnerId(long ownerId, bool trackChanges = false)
-        {
-            return FindByCondition(p => p.OwnerId.Equals(ownerId), trackChanges)
-                .ToList();
-        }
+
     }
 }

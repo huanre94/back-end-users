@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DomainLayer.Models;
+using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Contracts;
+using ServiceLayer.DataTransferObjects;
 
 namespace PresentationLayer.Controllers
 {
-    [Route("api/pets")]
+    [Route("api/owners/{ownerId}/pets")]
     [ApiController]
     public class PetController : ControllerBase
     {
@@ -12,24 +14,29 @@ namespace PresentationLayer.Controllers
         public PetController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GetAllPets()
+        public IActionResult GetPets(long ownerId)
         {
-            var pets = _service.PetService.GetAllPets();
+            var pets = _service.PetService.GetPets(ownerId);
             return Ok(pets);
         }
 
-        [HttpGet("{id:long}")]
-        public IActionResult GetPetById(long id)
+        [HttpGet("{id:long}", Name = "GetPetById")]
+        public IActionResult GetPetById(long ownerId, long id)
         {
-            var pet = _service.PetService.GetPetById(id);
+            var pet = _service.PetService.GetPetById(ownerId, id);
+
             return Ok(pet);
         }
 
-        [HttpGet("owner/{ownerId:long}")]
-        public IActionResult GetPetsByOwnerId(long ownerId)
+        [HttpPost]
+        public IActionResult CreatePet(long ownerId, [FromBody] PetCreateDto pet)
         {
-            var pets = _service.PetService.GetPetsByOwnerId(ownerId);
-            return Ok(pets);
+            if (pet is null)
+                return BadRequest("Pet object is null");
+
+            var petResponse = _service.PetService.CreatePet(ownerId, pet);
+
+            return CreatedAtRoute("GetPetById", new { ownerId = petResponse.OwnerId, id = petResponse.Id }, petResponse);
         }
     }
 }
