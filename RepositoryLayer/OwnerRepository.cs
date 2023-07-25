@@ -14,6 +14,12 @@ namespace RepositoryLayer
         {
         }
 
+        public void CreateOwner(Owner owner) => Create(owner);
+
+        public void UpdateOwner(Owner owner) => Update(owner);
+
+        public void DeleteOwner(Owner owner) => Delete(owner);
+
         public IEnumerable<Owner> GetAllOwners(bool trackChanges = false)
         {
             return FindAll(trackChanges)
@@ -26,5 +32,6 @@ namespace RepositoryLayer
             return FindByCondition(o => o.Id.Equals(ownerId), trackChanges)
                 .SingleOrDefault();
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using ServiceLayer.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,12 @@ namespace ServiceLayer.Contracts
 {
     public interface IOwnerService
     {
-        IEnumerable<Owner> GetAllOwners(bool trackChanges = false);
-        Owner GetOwnerById(long ownerId, bool trackChanges = false);
+        IEnumerable<OwnerDto> GetAllOwners(bool trackChanges = false);
+        OwnerDto GetOwnerById(long ownerId, bool trackChanges = false);
 
+        OwnerDto CreateOwner(OwnerCreateDto owner);
+
+        void UpdateOwner(long ownerId, OwnerUpdateDto owner, bool trackChanges = false);
+        void DeleteOwner(long ownerId, bool trackChanges = false);
     }
 }

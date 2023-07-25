@@ -11,5 +11,9 @@ namespace RepositoryLayer.Contracts
     {
         IEnumerable<Owner> GetAllOwners(bool trackChanges = false);
         Owner GetOwnerById(long ownerId, bool trackChanges = false);
+
+        void CreateOwner(Owner owner);
+        void UpdateOwner(Owner owner);
+        void DeleteOwner(Owner owner);
     }
 }
