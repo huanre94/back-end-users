@@ -24,15 +24,15 @@ namespace ServiceLayer
             return pets;
         }
 
-        public Pet GetPetById(bool trackChanges = false)
+        public Pet GetPetById(long id, bool trackChanges = false)
         {
-            var pet = _repository.Pet.GetPetById(trackChanges);
+            var pet = _repository.Pet.GetPetById(id, trackChanges);
             return pet;
         }
 
-        public IEnumerable<Pet> GetPetsByOwnerId(bool trackChanges = false)
+        public IEnumerable<Pet> GetPetsByOwnerId(long ownerId, bool trackChanges = false)
         {
-            var pets = _repository.Pet.GetPetsByOwnerId(trackChanges);
+            var pets = _repository.Pet.GetPetsByOwnerId(ownerId, trackChanges);
             return pets;
         }
     }

@@ -10,9 +10,9 @@ namespace RepositoryLayer.Contracts
     public interface IPetRepository
     {
         IEnumerable<Pet> GetAllPets(bool trackChanges = false);
-        Pet GetPetById(bool trackChanges = false);
-        
-        IEnumerable<Pet> GetPetsByOwnerId(bool trackChanges = false);
+        Pet GetPetById(long id, bool trackChanges = false);
+
+        IEnumerable<Pet> GetPetsByOwnerId(long ownerId, bool trackChanges = false);
 
 
     }

@@ -11,8 +11,8 @@ namespace ServiceLayer.Contracts
     {
 
         IEnumerable<Pet> GetAllPets(bool trackChanges = false);
-        Pet GetPetById(bool trackChanges = false);
+        Pet GetPetById (long id, bool trackChanges = false);
 
-        IEnumerable<Pet> GetPetsByOwnerId(bool trackChanges = false);
+        IEnumerable<Pet> GetPetsByOwnerId(long id, bool trackChanges = false);
     }
 }

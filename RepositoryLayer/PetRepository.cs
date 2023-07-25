@@ -21,15 +21,15 @@ namespace RepositoryLayer
                  .ToList();
         }
 
-        public Pet GetPetById(bool trackChanges = false)
+        public Pet GetPetById(long id, bool trackChanges = false)
         {
-            return FindByCondition(p => p.Id.Equals(p.Id), trackChanges)
+            return FindByCondition(p => p.Id.Equals(id), trackChanges)
                 .SingleOrDefault();
         }
 
-        public IEnumerable<Pet> GetPetsByOwnerId(bool trackChanges = false)
+        public IEnumerable<Pet> GetPetsByOwnerId(long ownerId, bool trackChanges = false)
         {
-            return FindByCondition(p => p.OwnerId.Equals(p.OwnerId), trackChanges)
+            return FindByCondition(p => p.OwnerId.Equals(ownerId), trackChanges)
                 .ToList();
         }
     }
