@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Contracts
 {
- public interface IOwnerService
+    public interface IOwnerService
     {
         IEnumerable<Owner> GetAllOwners(bool trackChanges = false);
-        Owner GetOwnerById(Guid ownerId, bool trackChanges = false);
+        Owner GetOwnerById(long ownerId, bool trackChanges = false);
 
     }
 }

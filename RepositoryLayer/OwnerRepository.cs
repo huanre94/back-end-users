@@ -21,7 +21,7 @@ namespace RepositoryLayer
                 .ToList();
         }
 
-        public Owner GetOwnerById(Guid ownerId, bool trackChanges = false)
+        public Owner GetOwnerById(long ownerId, bool trackChanges = false)
         {
             return FindByCondition(o => o.Id.Equals(ownerId), trackChanges)
                 .SingleOrDefault();

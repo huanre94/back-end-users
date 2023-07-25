@@ -24,7 +24,7 @@ namespace ServiceLayer
             return owners;
         }
 
-        public Owner GetOwnerById(Guid ownerId, bool trackChanges = false)
+        public Owner GetOwnerById(long ownerId, bool trackChanges = false)
         {
             var owner = _repository.Owner.GetOwnerById(ownerId, trackChanges);
             return owner;
