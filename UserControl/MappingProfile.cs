@@ -11,14 +11,12 @@ namespace PresentationLayer
             CreateMap<Owner, OwnerDto>()
                 .ForCtorParam("Status", opt => opt.MapFrom(x => x.IsActive));
 
+            CreateMap<OwnerCreateDto, Owner>();
 
-            // CreateMap<OwnerDto, Owner>();
             CreateMap<Pet, PetDto>()
                     .ForCtorParam("Status", opt => opt.MapFrom(x => x.IsActive));
 
             CreateMap<PetCreateDto, Pet>();
-
-            // CreateMap<PetDto, Pet>();
         }
     }
 }
