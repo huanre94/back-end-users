@@ -1,4 +1,5 @@
-﻿using RepositoryLayer.Contracts;
+﻿using AutoMapper;
+using RepositoryLayer.Contracts;
 using ServiceLayer.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace ServiceLayer
         private readonly Lazy<IOwnerService> _ownerService;
         private readonly Lazy<IPetService> _petService;
 
-public ServiceManager(IRepositoryManager repositoryManager)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
-            _ownerService = new Lazy<IOwnerService>(() => new OwnerService(repositoryManager));
-            _petService = new Lazy<IPetService>(() => new PetService(repositoryManager));
+            _ownerService = new Lazy<IOwnerService>(() => new OwnerService(repositoryManager, mapper));
+            _petService = new Lazy<IPetService>(() => new PetService(repositoryManager, mapper));
         }
 
         public IOwnerService OwnerService => _ownerService.Value;
