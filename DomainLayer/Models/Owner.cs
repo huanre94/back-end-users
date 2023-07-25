@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,19 @@ namespace DomainLayer.Models
 {
     public class Owner : AuditableEntity
     {
-        [Column("OwnerId")]
-        public long Id { get; set; }
-
+        [Required(ErrorMessage = "Campo Nombre es requerido.")]
+        [MaxLength(200)]
         public string Name { get; set; }
+        [Phone]
         public string Telephone { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
-        [Column("Status")]
-        public bool IsActive { get; set; }
 
         public ICollection<Pet>? Pets { get; set; }
 
-        //public Owner()
-        //        {
-        //            Pets = new List<Pet>();
-        //        }
+        public Owner()
+        {
+            CreatedAt = DateTime.Now;
+        }
     }
 }
