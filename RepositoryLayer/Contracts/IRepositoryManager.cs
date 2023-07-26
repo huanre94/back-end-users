@@ -11,5 +11,6 @@ namespace RepositoryLayer.Contracts
         IOwnerRepository Owner { get; }
         IPetRepository Pet { get; }
         void Save();
+        Task SaveAsync();
     }
 }

@@ -29,7 +29,7 @@ namespace RepositoryLayer
             return !trackChanges ? PetStoreContext.Set<T>().AsNoTracking() : PetStoreContext.Set<T>();
         }
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges= false)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges = false)
         {
             return !trackChanges ? PetStoreContext.Set<T>().Where(expression).AsNoTracking() : PetStoreContext.Set<T>().Where(expression);
         }

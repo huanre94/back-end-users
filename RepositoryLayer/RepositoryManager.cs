@@ -25,5 +25,7 @@ namespace RepositoryLayer
         public IPetRepository Pet => _petRepository.Value;
 
         public void Save() => _petStoreContext.SaveChanges();
+
+        public async Task SaveAsync() => await _petStoreContext.SaveChangesAsync();
     }
 }
