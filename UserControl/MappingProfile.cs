@@ -17,6 +17,8 @@ namespace PresentationLayer
                     .ForCtorParam("Status", opt => opt.MapFrom(x => x.IsActive));
 
             CreateMap<PetCreateDto, Pet>();
+
+            CreateMap<PetUpdateDto, Pet>();
         }
     }
 }

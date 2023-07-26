@@ -10,6 +10,6 @@ namespace ServiceLayer.DataTransferObjects
 
     public record PetCreateDto(string Name, DateTime? BirthDate);
 
-    public record PetUpdateDto(string Name, DateTime? BirthDate, long OwnerId);
+    public record PetUpdateDto(string Name, DateTime? BirthDate, bool status);
 
 }
