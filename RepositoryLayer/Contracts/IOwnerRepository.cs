@@ -9,11 +9,11 @@ namespace RepositoryLayer.Contracts
 {
     public interface IOwnerRepository
     {
-        IEnumerable<Owner> GetAllOwners(bool trackChanges = false);
-        Owner GetOwnerById(long ownerId, bool trackChanges = false);
+        Task<IEnumerable<Owner>> GetAllOwners(bool trackChanges = false);
+        Task<Owner> GetOwnerById(long ownerId, bool trackChanges = false);
 
         void CreateOwner(Owner owner);
-        void UpdateOwner(Owner owner);
+        Task UpdateOwner(Owner owner);
         void DeleteOwner(Owner owner);
     }
 }

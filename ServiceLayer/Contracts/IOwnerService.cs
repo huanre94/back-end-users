@@ -10,8 +10,8 @@ namespace ServiceLayer.Contracts
 {
     public interface IOwnerService
     {
-        IEnumerable<OwnerDto> GetAllOwners(bool trackChanges = false);
-        OwnerDto GetOwnerById(long ownerId, bool trackChanges = false);
+        Task<IEnumerable<OwnerDto>> GetAllOwners(bool trackChanges = false);
+        Task<OwnerDto> GetOwnerById(long ownerId, bool trackChanges = false);
 
         OwnerDto CreateOwner(OwnerCreateDto owner);
 

@@ -15,16 +15,16 @@ namespace PresentationLayer.Controllers
         public OwnerController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GetAllOwners()
+        public async Task<IActionResult> GetAllOwners()
         {
-            var owners = _service.OwnerService.GetAllOwners();
+            var owners = await _service.OwnerService.GetAllOwners();
             return Ok(owners);
         }
 
         [HttpGet("{id:long}", Name = "GetOwnerById")]
-        public IActionResult GetOwnerById(long id)
+        public async Task<IActionResult> GetOwnerById(long id)
         {
-            var owner = _service.OwnerService.GetOwnerById(id);
+            var owner = await _service.OwnerService.GetOwnerById(id);
             return Ok(owner);
         }
 

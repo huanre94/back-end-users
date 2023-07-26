@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Contracts;
 using System;
 using System.Collections.Generic;
@@ -16,21 +17,21 @@ namespace RepositoryLayer
 
         public void CreateOwner(Owner owner) => Create(owner);
 
-        public void UpdateOwner(Owner owner) => Update(owner);
+        public async Task UpdateOwner(Owner owner) => Update(owner);
 
         public void DeleteOwner(Owner owner) => Delete(owner);
 
-        public IEnumerable<Owner> GetAllOwners(bool trackChanges = false)
+        public async Task<IEnumerable<Owner>> GetAllOwners(bool trackChanges = false)
         {
-            return FindAll(trackChanges)
+            return await FindAll(trackChanges)
                 .OrderBy(o => o.Id)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Owner GetOwnerById(long ownerId, bool trackChanges = false)
+        public async Task<Owner> GetOwnerById(long ownerId, bool trackChanges = false)
         {
-            return FindByCondition(o => o.Id.Equals(ownerId), trackChanges)
-                .SingleOrDefault();
+            return await FindByCondition(o => o.Id.Equals(ownerId), trackChanges)
+                .SingleOrDefaultAsync();
         }
 
     }

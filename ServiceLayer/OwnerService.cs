@@ -27,7 +27,7 @@ namespace ServiceLayer
             var ownerEntity = _mapper.Map<Owner>(owner);
 
             _repository.Owner.CreateOwner(ownerEntity);
-            _repository.Save();
+            _repository.SaveAsync();
 
             var ownerDto = _mapper.Map<OwnerDto>(ownerEntity);
 
@@ -36,18 +36,18 @@ namespace ServiceLayer
 
         public void DeleteOwner(long ownerId, bool trackChanges = false) => throw new NotImplementedException();
 
-        public IEnumerable<OwnerDto> GetAllOwners(bool trackChanges = false)
+        public async Task<IEnumerable<OwnerDto>> GetAllOwners(bool trackChanges = false)
         {
-            var owners = _repository.Owner.GetAllOwners(trackChanges);
+            var owners = await _repository.Owner.GetAllOwners(trackChanges);
 
             var ownersDto = _mapper.Map<IEnumerable<OwnerDto>>(owners);
 
             return ownersDto;
         }
 
-        public OwnerDto GetOwnerById(long ownerId, bool trackChanges = false)
+        public async Task<OwnerDto> GetOwnerById(long ownerId, bool trackChanges = false)
         {
-            var owner = _repository.Owner.GetOwnerById(ownerId, trackChanges);
+            var owner = await _repository.Owner.GetOwnerById(ownerId, trackChanges);
 
             var ownerDto = _mapper.Map<OwnerDto>(owner);
 
@@ -61,8 +61,11 @@ namespace ServiceLayer
             if (ownerDto is null)
                 throw new Exception("Dueño no encontrado.");
 
-            _repository.Owner.UpdateOwner(ownerDto);
-            _repository.Save();
+            var ownerEntity = _mapper.Map<Owner>(owner);
+
+            _repository.Owner.UpdateOwner(ownerEntity);
+            _repository.SaveAsync();
+
         }
     }
 }
