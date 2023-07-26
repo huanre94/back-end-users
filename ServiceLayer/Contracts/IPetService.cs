@@ -11,12 +11,12 @@ namespace ServiceLayer.Contracts
     public interface IPetService
     {
 
-        IEnumerable<PetDto> GetPets(long ownerId, bool trackChanges = false);
-        PetDto GetPetById(long ownerId, long id, bool trackChanges = false);
+        Task<IEnumerable<PetDto>> GetPets(long ownerId, bool trackChanges = false);
+        Task<PetDto> GetPetById(long ownerId, long id, bool trackChanges = false);
 
-        PetDto CreatePet(long ownerId, PetCreateDto pet, bool trackChanges = false);
+        Task<PetDto> CreatePet(long ownerId, PetCreateDto pet, bool trackChanges = false);
 
-        void UpdatePet(long id, PetUpdateDto pet, bool trackChanges = false);
-        void DeletePet(long id, bool trackChanges = false);
+        Task UpdatePet(long ownerId, long id, PetUpdateDto petUpdate, bool ownerTrackChanges = false, bool petTrackChanges = false);
+        void DeletePet(long ownerId, long id, bool trackChanges = false);
     }
 }

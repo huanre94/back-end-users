@@ -14,29 +14,40 @@ namespace PresentationLayer.Controllers
         public PetController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GetPets(long ownerId)
+        public async Task<IActionResult> GetPets(long ownerId)
         {
-            var pets = _service.PetService.GetPets(ownerId);
+            var pets = await _service.PetService.GetPets(ownerId);
             return Ok(pets);
         }
 
         [HttpGet("{id:long}", Name = "GetPetById")]
-        public IActionResult GetPetById(long ownerId, long id)
+        public async Task<IActionResult> GetPetById(long ownerId, long id)
         {
-            var pet = _service.PetService.GetPetById(ownerId, id);
+            var pet = await _service.PetService.GetPetById(ownerId, id);
 
             return Ok(pet);
         }
 
         [HttpPost]
-        public IActionResult CreatePet(long ownerId, [FromBody] PetCreateDto pet)
+        public async Task<IActionResult> CreatePet(long ownerId, [FromBody] PetCreateDto pet)
         {
             if (pet is null)
                 return BadRequest("Pet object is null");
 
-            var petResponse = _service.PetService.CreatePet(ownerId, pet);
+            var petResponse = await _service.PetService.CreatePet(ownerId, pet);
 
             return CreatedAtRoute("GetPetById", new { ownerId = petResponse.OwnerId, id = petResponse.Id }, petResponse);
+        }
+
+        [HttpPut("{id:long}")]
+        public async Task<IActionResult> UpdatePet(long ownerId, long id, [FromBody] PetUpdateDto pet)
+        {
+            if (pet is null)
+                return BadRequest("Pet object is null");
+
+            await _service.PetService.UpdatePet(ownerId, id, pet, false, true);
+
+            return NoContent();
         }
     }
 }

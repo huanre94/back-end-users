@@ -9,8 +9,8 @@ namespace RepositoryLayer.Contracts
 {
     public interface IPetRepository
     {
-        IEnumerable<Pet> GetPets(long ownerId, bool trackChanges = false);
-        Pet GetPetById(long ownerId, long id, bool trackChanges = false);
+        Task<IEnumerable<Pet>> GetPets(long ownerId, bool trackChanges = false);
+        Task<Pet> GetPetById(long ownerId, long id, bool trackChanges = false);
 
         void CreatePet(long ownerId, Pet pet);
         void UpdatePet(long ownerId, Pet pet);

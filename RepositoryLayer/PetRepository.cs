@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Contracts;
 using System;
 using System.Collections.Generic;
@@ -28,17 +29,17 @@ namespace RepositoryLayer
             Update(pet);
         }
 
-        public IEnumerable<Pet> GetPets(long ownerId, bool trackChanges = false)
+        public async Task<IEnumerable<Pet>> GetPets(long ownerId, bool trackChanges = false)
         {
-            return FindByCondition(p => p.OwnerId == ownerId, trackChanges)
+            return await FindByCondition(p => p.OwnerId == ownerId, trackChanges)
                  .OrderBy(p => p.Id)
-                 .ToList();
+                 .ToListAsync();
         }
 
-        public Pet GetPetById(long ownerId, long id, bool trackChanges = false)
+        public async Task<Pet> GetPetById(long ownerId, long id, bool trackChanges = false)
         {
-            return FindByCondition(p => p.OwnerId.Equals(ownerId) && p.Id.Equals(id), trackChanges)
-                .SingleOrDefault();
+            return await FindByCondition(p => p.OwnerId.Equals(ownerId) && p.Id.Equals(id), trackChanges)
+                .SingleOrDefaultAsync();
         }
 
 
